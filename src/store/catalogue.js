@@ -1,0 +1,7 @@
+const visType = {
+
+}
+
+const relationType = {
+    
+}

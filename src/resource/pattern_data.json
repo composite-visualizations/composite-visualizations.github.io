@@ -1,0 +1,93 @@
+{
+    "juxtaposition":{
+        "name":"Juxtaposition",
+        "definition":"In a juxtaposition visualization, the components have no overlapping and are positioned side-by-side. Please note that, although a user interface (UI) may also consist of visualizations without overlapping, it is not considered a juxtaposition visualization in the context of this study. The component interrelationships in a UI are considerably looser than those in a juxtaposition visualization. As a rule of thumb, we consider a UI an arbitrary placement of visualizations or interface components (e.g., buttons, sliders, and progress bars) and only extract the visualizations for this study.",
+        "subtypes":[
+            {
+                "id":"repeated",
+                "name":"Repetition",
+                "definition":"Repetition refers to the juxtaposition visualizations which are of the same structure (visualization type or composite visualization), but their components are not symmetrical with respect to coordinate axes. ",
+                "advantages":["The visual similarity of repetition components provides a strong visual hint of grouping.","Repetition visualizations are easy for users to compare and find anomalies.","Repetition visualizations are easy to implement because codes can be reused conveniently."],
+                "disadvantages":["It is difficult to compare when the number of components gets large.","Because of the same appearance of components, users may directly compare visual properties, such as size and position, without a careful reference to the scales and attributes of individual components, leading to incorrect insights."],
+                "suggestions":["Keeping the component number between 2 and 8 in a repetition visualization is the most popular. When using it as the main view for analysis, the number is even fewer ([2,4))","In many examples, it tends to omit unnecessary visual elements to reduce visual clutter. For example, using a shared axis and removing duplicated marks for saving space and assisting comparison."]
+            },
+            {
+                "id":"mirrored",
+                "name":"Mirror",
+                "definition":"Mirror pattern refers to symmetrically placing two components of the same structure with respect to an coordinate axis. Two components have the same scale on both sides of an axis of symmetry.",
+                "advantages":["Taking advantage of people's experience with mirror reflections, mirror visualizations imply identical objects and invite people to compare the mirror two components","Mirror visualizations are aesthetically pleasing because of symmetry. From the samples, we discover that in some cases, mirror visualizations are adopted as a part of a symmetrical design."],
+                "disadvantages":["Mirror visualizations only support comparing two data series.","Because of the symmetry layout, it is more difficult to discover precise differences between components."],
+                "suggestions":["Mirror visualizations might not be a good choice when the main design goal is precise comparison, but they can be used as auxiliary components within a symmetric design. When using mirror visualizations, a number of designs use an explicit encoding to represent the difference or hide the redundant elements."]
+            },
+            {
+                "id":"stacked",
+                "name":"Stack",
+                "definition":"Components of different types or structures are aligned or concatenated by the same data items or a shared margin (e.g., axis) in a stack visualization.Please note that, although a repetition visualization may also have a shared axis, stack visualizations are different in terms of representation and usage.First, the components in a stack visualization are often different, while components in a repetition visualization are strictly homogeneous. Second, a repetition visualization is mainly used for visual comparison in a space-efficient manner, while a stack visualization more focuses on presenting different facets of the same data in an interconnected manner.",
+                "advantages":["A stack visualization can present different aspects of the same data at the same time in a compact manner.","Relationships between two stack components are maintained by a shared axis or shared visual items. Users can conveniently switch back and forth between components to explore the data because of such visual continuity."],
+                "disadvantages":["The visual continuity is reduced when the number of items or the distance between aligned items increases."],
+                "suggestions":["A visualization could be created by connecting different charts for better visual coherence using intermediate components if the back-end data of the charts are related. In this case, stacking multiple visualizations along the same direction or using a grid layout could improve space usage.","When the number of aligned items is large or the alignments obscure, visual hints are used to indicate the relationships, such as color encoding, highlighting-on-hover, or visual links."]
+            }
+        ],
+        "advantages":["Compared to overlay and nesting patterns where visual components are overlay on or contained by other components, juxtaposition visualizations offer a flexible and clear layout for visual components without visual occlusions."],
+        "disadvantages":[],
+        "suggestions":[]
+    },
+    "overlay":{
+        "name":"Overlay",
+        "definition":"In an overlay visualization, visual components are overlaid over other components.",
+        "subtypes":[
+            {
+                "id":"accompanied",
+                "name":"Co-Axis",
+                "definition":"Component visualizations share the same coordinate system in a co-axis visualization.",
+                "advantages":["A co-axis visualization places multiple components in the same coordinate system to facilitate direct comparison and pattern recognition."],
+                "disadvantages":[],
+                "suggestions":["Overlaid components might use transparency to reduce occlusion or put summary/important components on the top. For example, placing box plots on top of a scatterplot for anomaly detection tasks.","A number of designs adopt multiple coordinate systems in a co-axis visualization, which might introduce potential biases."]
+            },
+            {
+                "id":"coordinated",
+                "name":"Coordinate",
+                "definition":"In a visualization with coordinate design patterns, parent components provide coordinates (e.g., Cartesian coordinate system, geographic coordinate system, and other reference systems such as grids of the matrix) for child components (or their visual elements). The reference systems are regarded to be part of the parent components. In other words, the positions of child components encode back-end spatial data referring to the parent component.",
+                "advantages":["Compared with components of a co-axis visualization that have independent but identical coordinate systems, the layout of child components is determined by their parent components in coordinate visualizations. Therefore, they are effective in helping users interpret child components in the context of a parent component."],
+                "disadvantages":[],
+                "suggestions":["Various designs choose to combine a parent component that provides spatial context and child components whose visual elements do not encode spatial information, such as word cloud and proportional area charts.","In addition to the inevitable occlusions between child components and parent components, the overlapping between the child components may exacerbate the overall occlusions."]
+            },
+            {
+                "id":"annotated",
+                "name":"Annotation",
+                "definition":"Child components of small size are overlaid on parent components and connected to elements of parent components in annotation visualizations, but the positions of child components do not encode spatial information. Moreover, the child components provide a ``cut-out'' lens for the visual elements connected.",
+                "advantages":["The advantage of annotated visualizations is the flexibility in positioning child components."],
+                "disadvantages":[],
+                "suggestions":["In most cases, only details of focused data items are visualized following the rule of details on demand.","In some designs, the positions of child components are organized using layout optimization models (e.g., saliency-based method) to utilize empty space and reduce line crossings."]
+            },
+            {
+                "id":"large-panel",
+                "name":"Large Panel",
+                "definition":"Child components of small size overlay directly on parent components without visual links in a large panel visualization, and the positions of child components do not encode spatial information. Unlike annotations, large panels do not connect child and parent components using links or anchors and the child components show details of the parent components in an overview + detail manner.",
+                "advantages":["Compared with annotated visualizations, large-panel visualizations offer even more flexibility for placing child components, since they do not require any anchoring points in the parent component."],
+                "disadvantages":[],
+                "suggestions":["For large-panel visualizations, they generally place child components at positions where elements are less important (such as corners) to mitigate visual occlusion."]
+            }
+        ],
+        "advantages":["Compared with juxtaposition visualizations, an overlay visualization often has a more compact layout.","Overlay visualizations can directly represent the correspondences between different components, thus enhancing the visual effect."],
+        "disadvantages":["A common disadvantage of overlay visualizations is occlusions, compared with juxtaposition visualizations and nesting visualizations."],
+        "suggestions":["When designing an overlay visualization, it would be better to use clutter reduction techniques (e.g., edge bundling) to improve the visual appearance."]
+    },
+    "nesting":{
+        "name":"Nesting",
+        "definition":"",
+        "subtypes":[
+            {
+                "id":"nesting",
+                "name":"Nesting",
+                "definition":"In nesting visualizations, some components (denoted by child components) are embedded into the visual elements or internal area of other components (denoted by parent components)",
+                "advantages":["Nesting visualizations have no occlusions between parent and child components and imply a hierarchical information, compared to overlay visualizations. Nesting visualizations are well-suited to visualize the overview while maintaining simple details of the child items (e.g., graph nodes and matrix cells).","Nesting visualizations are more compact than overlay visualizations and juxtaposition visualizations."],
+                "disadvantages":[],
+                "suggestions":["A number of designs choose to use relatively common/simple visualizations in child components, such as bar charts and heatmaps. We infer that this is because visualizations with complex configurations are hard to identify due to the limited space of child components.","A number of designs apply geometric transformations to the elements of parent components to make room for child components. For example, Sun et al. proposed a route-zooming technique to distort the map for hosting visualizations for spatio-temporal information."]
+            }
+        ],
+        "advantages":[""],
+        "disadvantages":[],
+        "suggestions":[]
+    }
+}
